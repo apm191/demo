@@ -1,9 +1,9 @@
-package com.example.demo.dao;
+package com.example.demo.dao.Jpa;
 
 import com.example.demo.models.Ticket;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface TicketRepo extends JpaRepository<Ticket,Integer>
+public interface TicketRepository extends JpaRepository<Ticket,Integer>
 {
 
 }

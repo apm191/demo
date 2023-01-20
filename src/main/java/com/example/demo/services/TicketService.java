@@ -1,7 +1,7 @@
 package com.example.demo.services;
 
-import com.example.demo.dao.BusRepository;
-import com.example.demo.dao.TicketRepo;
+import com.example.demo.dao.Jpa.BusRepository;
+import com.example.demo.dao.Jpa.TicketRepository;
 import com.example.demo.models.Bus;
 import com.example.demo.models.Request;
 import com.example.demo.models.Ticket;
@@ -14,7 +14,7 @@ import java.util.List;
 public class TicketService
 {
     @Autowired
-    private TicketRepo proRepo;
+    private TicketRepository proRepo;
 
     @Autowired
     private BusRepository busRepo;

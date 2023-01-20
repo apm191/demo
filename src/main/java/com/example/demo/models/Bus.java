@@ -1,8 +1,9 @@
 package com.example.demo.models;
 
 import jakarta.persistence.*;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
 import java.util.List;
 
 @Entity
@@ -16,14 +17,8 @@ public class Bus
     public int BookedSeats;
 
     public String BusSource;
-
-//    @ElementCollection
-//    @CollectionTable(name = "RouteMapping",
-//            joinColumns = {@JoinColumn(name = "BusId", referencedColumnName = "Id")})
-//    @MapKeyColumn(name = "StationName")
-//    @Column(name = "StationNumber")
-//    public HashMap<String,Integer> BusDestination;
-
+    @Column(name="arguments")
+    @ElementCollection(targetClass=String.class)
     public List<String>BusDestination;
     public Bus() {
     }
