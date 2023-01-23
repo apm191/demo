@@ -26,13 +26,6 @@ public class TicketController
         return ticketService.getTicket(id);
     }
 
-//    @PostMapping("/ticket")
-//    public void addTicket(@RequestBody Ticket ticket)
-//    {
-//
-//        ticketService.setTicket(ticket);
-//    }
-
     @PutMapping("/ticket")
     public void updateTicket(@RequestBody Ticket ticket)
     {

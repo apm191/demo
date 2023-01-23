@@ -1,17 +1,23 @@
 package com.example.demo.models;
 
 import jakarta.persistence.*;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
-
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
 public class Bus
 {
     @Id
+    @NotNull(message = "Please specify the ID!!")
     public int Id;
+
+    @NotNull(message = "Please specify Bus Operator Name!!")
     public String BusOperator;
+
+    @Min(1)
+    @Max(1000)
     public int TotalSeats;
 
     public int BookedSeats;

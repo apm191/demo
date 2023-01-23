@@ -1,10 +1,12 @@
 package com.example.demo.controller;
 
+import com.example.demo.handler.BusServiceException;
 import com.example.demo.models.Bus;
 import com.example.demo.services.BusService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -19,12 +21,13 @@ public class BusController
     }
 
     @GetMapping("/buses/{id}")
-    public Bus getBus(@PathVariable int id) {
-        return busService.getBus(id);
+    public Bus getBus(@PathVariable int id){
+        Bus bus = busService.getBus(id);
+        return bus;
     }
 
     @PostMapping("/buses")
-    public void addBus(@RequestBody Bus bus)
+    public void addBus(@RequestBody @Valid Bus bus)
     {
         busService.setBus(bus);
     }
