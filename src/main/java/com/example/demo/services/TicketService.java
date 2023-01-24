@@ -52,8 +52,8 @@ public class TicketService
 
         for(int i=0;i<busses.size();i++)
         {
-            if(busses.get(i).BusDestination.contains(request.Source) && busses.get(i).BusDestination.contains(request.Destination) && (busses.get(i).TotalSeats-busses.get(i).BookedSeats > 0)
-            && busses.get(i).BusDestination.indexOf(request.Source)<busses.get(i).BusDestination.indexOf(request.Destination))
+            if(busses.get(i).getBusDestination().contains(request.Source) && busses.get(i).getBusDestination().contains(request.Destination) && (busses.get(i).getTotalSeats()-busses.get(i).getBookedSeats() > 0)
+            && busses.get(i).getBusDestination().indexOf(request.Source)<busses.get(i).getBusDestination().indexOf(request.Destination))
             {
                 if(request.Reason.equals("CheckAvailability"))
                     return "Bus is Available!";
@@ -66,10 +66,10 @@ public class TicketService
 
     private String bookBus(Request request, Bus bus)
     {
-        bus.BookedSeats+=1;
+        bus.setBookedSeats(bus.getBookedSeats()+1);
         busRepo.save(bus);
-        int fare = (bus.BusDestination.indexOf(request.Destination)-bus.BusDestination.indexOf(request.Source) +1)*100;
-        Ticket ticket = new Ticket(request.Source,request.Destination,fare, bus.Id);
+        int fare = (bus.getBusDestination().indexOf(request.Destination)-bus.getBusDestination().indexOf(request.Source) +1)*100;
+        Ticket ticket = new Ticket(request.Source,request.Destination,fare, bus.getId());
         proRepo.save(ticket);
         int ticket_id = ticket.getTid();
         return Integer.toString(ticket_id);

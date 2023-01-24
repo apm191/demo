@@ -22,10 +22,8 @@ public class BusController
 
     @GetMapping("/buses/{id}")
     public Bus getBus(@PathVariable int id){
-        Bus bus = busService.getBus(id);
-        return bus;
+        return busService.getBus(id);
     }
-
     @PostMapping("/buses")
     public void addBus(@RequestBody @Valid Bus bus)
     {

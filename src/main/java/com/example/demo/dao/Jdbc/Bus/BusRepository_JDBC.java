@@ -26,16 +26,18 @@ public class BusRepository_JDBC
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    public Bus getBus(int Id) {
+    public Bus getBus(int Id)
+    {
         String query = "select * from bus inner join bus_bus_destination on bus.id = bus_bus_destination.bus_id and id=?";
-        List<Bus> bus = this.jdbcTemplate.query(query, new ResultSetExtractor<List<Bus>>() {
+        List<Bus> bus = this.jdbcTemplate.query(query, new ResultSetExtractor<List<Bus>>()
+        {
             @Override
             public List<Bus> extractData(ResultSet rs) throws SQLException, DataAccessException {
                 Map<Integer, Bus> destMap = new HashMap<>();
                 List<Bus> busList = new ArrayList<>();
                 while (rs.next()) {
                     if (destMap.containsKey(rs.getInt("id"))) {
-                        destMap.get(rs.getInt("id")).BusDestination.add(rs.getString("arguments"));
+                        destMap.get(rs.getInt("id")).getBusDestination().add(rs.getString("arguments"));
                     } else {
                         Bus bus = new Bus();
                         bus.setId(rs.getInt("id"));
@@ -46,24 +48,16 @@ public class BusRepository_JDBC
                         List<String> dest_array = new ArrayList<String>();
                         dest_array.add(rs.getString("arguments"));
                         bus.setBusDestination(dest_array);
-                        destMap.put(bus.Id, bus);
+                        destMap.put(bus.getId(), bus);
                     }
                 }
 
                 for (Bus bus : destMap.values()) {
                     busList.add(bus);
                 }
-
                 return busList;
             }
         },Id);
-
-//        for (int i = 0; i < bus.size(); i++)
-//        {
-//            if(bus.get(i).getId()==Id)
-//                return bus.get(i);
-//        }
-
         return bus.get(0);
     }
     public List<Bus> getBusList()
@@ -79,7 +73,7 @@ public class BusRepository_JDBC
                 {
                     if(destMap.containsKey(rs.getInt("id")))
                     {
-                        destMap.get(rs.getInt("id")).BusDestination.add(rs.getString("arguments"));
+                        destMap.get(rs.getInt("id")).getBusDestination().add(rs.getString("arguments"));
                     }
                     else
                     {
@@ -92,7 +86,7 @@ public class BusRepository_JDBC
                         List<String> dest_array = new ArrayList<String>();
                         dest_array.add(rs.getString("arguments"));
                         bus.setBusDestination(dest_array);
-                        destMap.put(bus.Id,bus);
+                        destMap.put(bus.getId(),bus);
                     }
                 }
 

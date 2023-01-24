@@ -1,5 +1,7 @@
 package com.example.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -7,25 +9,26 @@ import jakarta.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
+@JsonPropertyOrder({"id","busOperator","busSource","busDestination","totalSeats","bookedSeats"})
 public class Bus
 {
     @Id
     @NotNull(message = "Please specify the ID!!")
-    public int Id;
+    private int Id;
 
     @NotNull(message = "Please specify Bus Operator Name!!")
-    public String BusOperator;
+    private String BusOperator;
 
     @Min(1)
     @Max(1000)
-    public int TotalSeats;
+    private int TotalSeats;
 
-    public int BookedSeats;
+    private int BookedSeats;
 
-    public String BusSource;
+    private String BusSource;
     @Column(name="arguments")
     @ElementCollection(targetClass=String.class)
-    public List<String>BusDestination;
+    private List<String>BusDestination;
     public Bus() {
     }
 
