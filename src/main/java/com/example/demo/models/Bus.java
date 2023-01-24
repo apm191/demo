@@ -1,17 +1,20 @@
 package com.example.demo.models;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @JsonPropertyOrder({"id","busOperator","busSource","busDestination","totalSeats","bookedSeats"})
-public class Bus
+public class Bus implements Serializable
 {
+    public static final long serialVersionUID = -5280452824297682079L;
     @Id
     @NotNull(message = "Please specify the ID!!")
     private int Id;
@@ -26,19 +29,24 @@ public class Bus
     private int BookedSeats;
 
     private String BusSource;
+
     @Column(name="arguments")
     @ElementCollection(targetClass=String.class)
-    private List<String>BusDestination;
+    private List<String> BusDestination;
+
     public Bus() {
     }
 
-    public Bus(int id, String busOperator, int totalSeats, int bookedSeats, String busSource, List<String> busDestination) {
-        Id = id;
-        BusOperator = busOperator;
-        TotalSeats = totalSeats;
-        BookedSeats = bookedSeats;
-        BusSource = busSource;
-        BusDestination = busDestination;
+    @Override
+    public String toString() {
+        return "Bus{" +
+                "Id=" + Id +
+                ", BusOperator='" + BusOperator + '\'' +
+                ", TotalSeats=" + TotalSeats +
+                ", BookedSeats=" + BookedSeats +
+                ", BusSource='" + BusSource + '\'' +
+                ", BusDestination=" + BusDestination +
+                '}';
     }
 
     public int getId() {
@@ -86,6 +94,15 @@ public class Bus
     }
 
     public void setBusDestination(List<String> busDestination) {
+        BusDestination = busDestination;
+    }
+
+    public Bus(int id, String busOperator, int totalSeats, int bookedSeats, String busSource, List<String> busDestination) {
+        Id = id;
+        BusOperator = busOperator;
+        TotalSeats = totalSeats;
+        BookedSeats = bookedSeats;
+        BusSource = busSource;
         BusDestination = busDestination;
     }
 }
